@@ -1,0 +1,21 @@
+<div mat-dialog-container class="popup" class="mat-elevation-z8">
+   <h2 mat-dialog-title>Address Details</h2>
+    <table mat-dialog-content>
+          <tr>
+        <th>Street:</th>
+        <th>Suite:</th>
+        <th>City:</th>
+        <th>zipcode:</th>
+      </tr>
+      <tr>
+        <td>{{ data.street }}</td>
+        <td>{{ data.suite }}</td>
+        <td>{{ data.city }}</td>
+        <td>{{ data.zipcode }}</td>
+      </tr>
+    </table>
+    <button mat-button (click)="closePopup()">Close</button >
+</div>
+   
+    
+
