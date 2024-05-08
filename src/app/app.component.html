@@ -1,3 +1,4 @@
+
 <mat-table mat-sort [dataSource]="dataSource">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
@@ -20,7 +21,7 @@
   </ng-container>
 
   <ng-container matColumnDef="viewAddress">
-    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
     <mat-cell class="successBgColor" *matCellDef="let user" (click)="viewAddress(user)">
       <button mat-icon-button>
         <mat-icon>home</mat-icon>
@@ -29,7 +30,7 @@
   </ng-container>
 
   <ng-container matColumnDef="edit">
-    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef (click)="addData()"><span style="color: green !important;" >ADD</span>  </mat-header-cell>
     <mat-cell class="successBgColor" *matCellDef="let user" (click)="editUser(user)">
       <button mat-icon-button>
         <mat-icon>edit</mat-icon>
@@ -40,3 +41,5 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+<!-- <button (click)="callComponent()">click</button> -->
+<!-- <app-t ></app-t> -->

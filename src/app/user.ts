@@ -23,3 +23,10 @@ export interface ApiData {
     bs: string
   }
 }
+
+export interface Users {
+  id:     number;
+  name:   string;
+  email:  string;
+  number: string;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -7,11 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ApiData } from './user';
+import { ApiData, Users } from './user';
 import { UserDailogComponent } from './user-dailog/user-dailog.component';
 import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddressDialogComponent } from './address-dialog/address-dialog.component';
+import { AddComponent } from './add/add.component';
 const matModule = [
   MatTableModule,
   MatButtonModule,
@@ -39,12 +40,41 @@ const matModule = [
 export class AppComponent implements OnInit {
   title = 'test';
   users: ApiData[] = [];
-  constructor(private dialog: MatDialog, private apiService: ApiService) {
+  data:Users[]=[]
+
+  datas :string ="neelesh"
+   
+  constructor(private dialog: MatDialog, private apiService: ApiService,private viewCaontainerRef :ViewContainerRef) {
     this.calldata()
   }
   displayedColumns: string[] = ['viewAddress', 'edit', 'id', 'name', 'username', 'email'];
   dataSource = new MatTableDataSource<ApiData>();
   ngOnInit() {
+this.apiService.newdataGet().subscribe((res:any)=>{
+  console.log(res,"new data")
+  this.data =res
+})
+  }
+
+//  async callComponent(){
+//   debugger
+//     // this.viewCaontainerRef.clear()
+//     const { DemondLodingComponent} = await import('./demond-loding/demond-loding.component') 
+//     this.viewCaontainerRef.createComponent(DemondLodingComponent)
+//   }
+
+  addData(){
+
+    this.dialog.open(AddComponent,{
+      width:"50%",
+      height:'60%',
+      data:this.data
+    })
+    debugger
+    // this.apiService.newdataPost(this.data).subscribe((res:any)=>{
+    //   console.log(res,"new data")
+    
+    // })
   }
   calldata() {
     this.apiService.getData().subscribe((res: any) => {
@@ -54,6 +84,7 @@ export class AppComponent implements OnInit {
   }
 
   editUser(user: ApiData) {
+    debugger
     const dialogRef = this.dialog.open(UserDailogComponent, {
       width: '450px',
       data: user
@@ -75,4 +106,6 @@ export class AppComponent implements OnInit {
       data: user.address
     });
   }
+
+  
 }
